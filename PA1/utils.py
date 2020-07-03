@@ -24,14 +24,15 @@ def f1_score(real_labels, predicted_labels):
 
 class Distances:
     @staticmethod
-    # TODO
     def canberra_distance(point1, point2):
         """
         :param point1: List[float]
         :param point2: List[float]
         :return: float
         """
-        raise NotImplementedError
+        dist = np.sum(np.abs(point1 - point2) /
+                      (np.abs(point1) + np.abs(point2)))
+        return dist
 
     @staticmethod
     # TODO
