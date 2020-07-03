@@ -69,14 +69,17 @@ class Distances:
         return dist
 
     @staticmethod
-    # TODO
     def cosine_similarity_distance(point1, point2):
         """
-       :param point1: List[float]
-       :param point2: List[float]
-       :return: float
-       """
-        raise NotImplementedError
+        :param point1: List[float]
+        :param point2: List[float]
+        :return: float
+        """
+        sim = np.dot(point1, point2)
+        sim /= (np.sqrt(np.dot(point1, point1)) *
+                np.sqrt(np.dot(point2, point2)))
+        dist = 1 - sim
+        return dist
 
     @staticmethod
     # TODO
