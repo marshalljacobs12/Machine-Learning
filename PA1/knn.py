@@ -10,8 +10,9 @@ class KNN:
         """
         self.k = k
         self.distance_function = distance_function
+        self.train_x = None
+        self.train_y = None
 
-    # TODO: save features and lable to self
     def train(self, features, labels):
         """
         In this function, features is simply training data which is a 2D list with float values.
@@ -24,9 +25,9 @@ class KNN:
         :param features: List[List[float]]
         :param labels: List[int]
         """
-        raise NotImplementedError
+        self.train_x = np.array(features)
+        self.train_y = np.array(labels)
 
-    # TODO: predict labels of a list of points
     def predict(self, features):
         """
         This function takes 2D list of test data points, similar to those from train function. Here, you need process
@@ -37,9 +38,14 @@ class KNN:
         :param features: List[List[float]]
         :return: List[int]
         """
-        raise NotImplementedError
+        preds = []
+        for x_test in features:
+            k_neighbors = self.get_k_neighbors(x_test)
+            values, counts = np.unique(k_neighbors, return_counts=True)
+            ind = np.argmax(counts)
+            preds.append(values[ind])
+        return preds
 
-    # TODO: find KNN of one point
     def get_k_neighbors(self, point):
         """
         This function takes one single data point and finds k-nearest neighbours in the training set.
@@ -48,7 +54,13 @@ class KNN:
         :param point: List[float]
         :return:  List[int]
         """
-        raise NotImplementedError
+        distances = []
+        for x in self.train_x:
+            d = self.distance_function(x, point)
+            distances.append(d)
+        k_neighbors_indices = np.array(distances).argsort()[:self.k]
+        k_neighbors_labels = self.train_y[k_neighbors_indices]
+        return k_neighbors_labels
 
 
 if __name__ == '__main__':
