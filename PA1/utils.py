@@ -59,14 +59,14 @@ class Distances:
         return dist
 
     @staticmethod
-    # TODO
     def inner_product_distance(point1, point2):
         """
         :param point1: List[float]
         :param point2: List[float]
         :return: float
         """
-        raise NotImplementedError
+        dist = np.dot(point1, point2)
+        return dist
 
     @staticmethod
     # TODO
