@@ -6,7 +6,6 @@ from knn import KNN
 ############################################################################
 
 
-# TODO: implement F1 score
 def f1_score(real_labels, predicted_labels):
     """
     Information on F1 score - https://en.wikipedia.org/wiki/F1_score
@@ -15,7 +14,12 @@ def f1_score(real_labels, predicted_labels):
     :return: float
     """
     assert len(real_labels) == len(predicted_labels)
-    raise NotImplementedError
+    if len(real_labels) == 0:
+        return 0
+
+    F1 = (2 * np.dot(real_labels, predicted_labels)) / \
+        (np.sum(real_labels) + np.sum(predicted_labels))
+    return F1
 
 
 class Distances:
@@ -115,7 +119,7 @@ class HyperparameterTuner:
         Then check distance function  [canberra > minkowski > euclidean > gaussian > inner_prod > cosine_dist]
         If they have same distance fuction, choose model which has a less k.
         """
-        
+
         # You need to assign the final values to these variables
         self.best_k = None
         self.best_distance_function = None
@@ -150,7 +154,7 @@ class HyperparameterTuner:
         Then check distance function  [canberra > minkowski > euclidean > gaussian > inner_prod > cosine_dist]
         If they have same distance function, choose model which has a less k.
         """
-        
+
         # You need to assign the final values to these variables
         self.best_k = None
         self.best_distance_function = None
