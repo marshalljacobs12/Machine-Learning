@@ -82,14 +82,14 @@ class Distances:
         return dist
 
     @staticmethod
-    # TODO
     def gaussian_kernel_distance(point1, point2):
         """
-       :param point1: List[float]
-       :param point2: List[float]
-       :return: float
-       """
-        raise NotImplementedError
+        :param point1: List[float]
+        :param point2: List[float]
+        :return: float
+        """
+        dist = -np.exp(-0.5 * np.sum(np.abs(point1 - point2) ** 2))
+        return dist
 
 
 class HyperparameterTuner:
