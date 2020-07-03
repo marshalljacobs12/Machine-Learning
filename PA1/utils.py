@@ -35,7 +35,6 @@ class Distances:
         return dist
 
     @staticmethod
-    # TODO
     def minkowski_distance(point1, point2):
         """
         Minkowski distance is the generalized version of Euclidean Distance
@@ -46,7 +45,8 @@ class Distances:
         :param point2: List[float]
         :return: float
         """
-        raise NotImplementedError
+        dist = np.sum(np.abs(point1 - point2) ** 3) ** float(1/3)
+        return dist
 
     @staticmethod
     # TODO
