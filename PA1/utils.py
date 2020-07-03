@@ -49,14 +49,14 @@ class Distances:
         return dist
 
     @staticmethod
-    # TODO
     def euclidean_distance(point1, point2):
         """
         :param point1: List[float]
         :param point2: List[float]
         :return: float
         """
-        raise NotImplementedError
+        dist = np.sum(np.abs(point1 - point2) ** 2) ** float(1/2)
+        return dist
 
     @staticmethod
     # TODO
