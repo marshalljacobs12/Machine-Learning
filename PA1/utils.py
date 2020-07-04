@@ -30,8 +30,13 @@ class Distances:
         :param point2: List[float]
         :return: float
         """
-        dist = np.sum(np.abs(point1 - point2) /
-                      (np.abs(point1) + np.abs(point2)))
+        # dist = np.sum(np.abs(point1 - point2) /
+        #               (np.abs(point1) + np.abs(point2)))
+        numerator = np.sum(np.abs(point1 - point2))
+        denominator = np.sum(np.abs(point1) + np.abs(point2))
+        if denominator == 0:
+            denominator = 1
+        dist = numerator / denominator
         return dist
 
     @staticmethod
@@ -124,14 +129,14 @@ class HyperparameterTuner:
         """
         best_f1 = 0
         for k in range(1, 30, 2):
-            for dist_func in distance_funcs.values():
-                model = KNN(k, dist_func)
+            for key, value in distance_funcs.items():
+                model = KNN(k, value)
                 model.train(x_train, y_train)
                 y_pred = model.predict(x_val)
                 f1 = f1_score(y_val, y_pred)
                 if f1 > best_f1:
                     self.best_k = k
-                    self.best_distance_function = dist_func
+                    self.best_distance_function = key
                     self.best_model = model
                     best_f1 = f1
 
@@ -139,7 +144,7 @@ class HyperparameterTuner:
     def tuning_with_scaling(self, distance_funcs, scaling_classes, x_train, y_train, x_val, y_val):
         """
         This part is similar to Part 1.3 except that before passing your training and validation data to KNN model to
-        tune k and disrance function, you need to create the normalized data using these two scalers to transform your
+        tune k and distance function, you need to create the normalized data using these two scalers to transform your
         data, both training and validation. Again, we will use f1-score to compare different models.
         Here we have 3 hyperparameters i.e. k, distance_function and scaler.
 
