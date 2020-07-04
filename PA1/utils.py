@@ -30,13 +30,13 @@ class Distances:
         :param point2: List[float]
         :return: float
         """
-        # dist = np.sum(np.abs(point1 - point2) /
-        #               (np.abs(point1) + np.abs(point2)))
-        numerator = np.sum(np.abs(point1 - point2))
-        denominator = np.sum(np.abs(point1) + np.abs(point2))
-        if denominator == 0:
-            denominator = 1
-        dist = numerator / denominator
+        dist = np.sum(np.abs(point1 - point2) /
+                      (np.abs(point1) + np.abs(point2)))
+        # numerator = np.sum(np.abs(point1 - point2))
+        # denominator = np.sum(np.abs(point1) + np.abs(point2))
+        # if denominator == 0:
+        # denominator = 1
+        # dist = numerator / denominator
         return dist
 
     @staticmethod
@@ -181,7 +181,6 @@ class NormalizationScaler:
     def __init__(self):
         pass
 
-    # TODO: normalize data
     def __call__(self, features):
         """
         Normalize features for every sample
@@ -193,7 +192,14 @@ class NormalizationScaler:
         :param features: List[List[float]]
         :return: List[List[float]]
         """
-        raise NotImplementedError
+        x_prime = []
+        for x in features:
+            if all(x_i == 0 for x_i in x):
+                x_prime.append(np.zeros_like(x))
+            else:
+                x_norm = x / (np.sqrt(np.dot(x, x)))
+                x_prime.append(x_norm)
+        return x_prime
 
 
 class MinMaxScaler:
