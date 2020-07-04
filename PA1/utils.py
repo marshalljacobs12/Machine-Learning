@@ -237,7 +237,9 @@ class MinMaxScaler:
     """
 
     def __init__(self):
-        pass
+        self.is_first_call = True
+        self.x_max = None
+        self.x_min = None
 
     def __call__(self, features):
         """
@@ -248,4 +250,9 @@ class MinMaxScaler:
         :param features: List[List[float]]
         :return: List[List[float]]
         """
-        raise NotImplementedError
+        if self.is_first_call:
+            self.x_max = np.amax(features, axis=0)
+            self.x_min = np.amin(features, axis=0)
+            self.is_first_call = False
+        x_prime = (features - self.x_min) / (self.x_max - self.x_min)
+        return x_prime
