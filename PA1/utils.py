@@ -129,14 +129,14 @@ class HyperparameterTuner:
         """
         best_f1 = 0
         for k in range(1, 30, 2):
-            for key, value in distance_funcs.items():
-                model = KNN(k, value)
+            for func_name, func in distance_funcs.items():
+                model = KNN(k, func)
                 model.train(x_train, y_train)
                 y_pred = model.predict(x_val)
                 f1 = f1_score(y_val, y_pred)
                 if f1 > best_f1:
                     self.best_k = k
-                    self.best_distance_function = key
+                    self.best_distance_function = func_name
                     self.best_model = model
                     best_f1 = f1
 
@@ -168,13 +168,29 @@ class HyperparameterTuner:
         Then check distance function  [canberra > minkowski > euclidean > gaussian > inner_prod > cosine_dist]
         If they have same distance function, choose model which has a less k.
         """
-
+        best_f1 = 0
+        for k in range(1, 30, 2):
+            for func_name, func in distance_funcs.items():
+                for scaler_name, scaler_class in scaling_classes.items():
+                    scaler = scaler_class()
+                    x_train_scaled = scaler(x_train)
+                    model = KNN(k, func)
+                    model.train(x_train_scaled, y_train)
+                    x_val_scaled = scaler(x_val)
+                    y_pred = model.predict(x_val_scaled)
+                    f1 = f1_score(y_val, y_pred)
+                    if f1 > best_f1:
+                        self.best_k = k
+                        self.best_distance_function = func_name
+                        self.best_model = model
+                        self.best_scaler = scaler_name
+                        best_f1 = f1
         # You need to assign the final values to these variables
-        self.best_k = None
-        self.best_distance_function = None
-        self.best_scaler = None
-        self.best_model = None
-        raise NotImplementedError
+        # self.best_k = None
+        # self.best_distance_function = None
+        # self.best_scaler = None
+        # self.best_model = None
+        # raise NotImplementedError
 
 
 class NormalizationScaler:
