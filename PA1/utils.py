@@ -99,7 +99,6 @@ class HyperparameterTuner:
         self.best_scaler = None
         self.best_model = None
 
-    # TODO: find parameters with the best f1 score on validation dataset
     def tuning_without_scaling(self, distance_funcs, x_train, y_train, x_val, y_val):
         """
         In this part, you should try different distance function you implemented in part 1.1, and find the best k.
@@ -123,12 +122,18 @@ class HyperparameterTuner:
         Then check distance function  [canberra > minkowski > euclidean > gaussian > inner_prod > cosine_dist]
         If they have same distance fuction, choose model which has a less k.
         """
-
-        # You need to assign the final values to these variables
-        self.best_k = None
-        self.best_distance_function = None
-        self.best_model = None
-        raise NotImplementedError
+        best_f1 = 0
+        for k in range(1, 30, 2):
+            for dist_func in distance_funcs.values():
+                model = KNN(k, dist_func)
+                model.train(x_train, y_train)
+                y_pred = model.predict(x_val)
+                f1 = f1_score(y_val, y_pred)
+                if f1 > best_f1:
+                    self.best_k = k
+                    self.best_distance_function = dist_func
+                    self.best_model = model
+                    best_f1 = f1
 
     # TODO: find parameters with the best f1 score on validation dataset, with normalized data
     def tuning_with_scaling(self, distance_funcs, scaling_classes, x_train, y_train, x_val, y_val):
