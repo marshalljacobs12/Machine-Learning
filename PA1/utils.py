@@ -23,6 +23,7 @@ def f1_score(real_labels, predicted_labels):
 
 
 class Distances:
+    # TODO: if denom = 0, set denom = 1
     @staticmethod
     def canberra_distance(point1, point2):
         """
@@ -140,7 +141,6 @@ class HyperparameterTuner:
                     self.best_model = model
                     best_f1 = f1
 
-    # TODO: find parameters with the best f1 score on validation dataset, with normalized data
     def tuning_with_scaling(self, distance_funcs, scaling_classes, x_train, y_train, x_val, y_val):
         """
         This part is similar to Part 1.3 except that before passing your training and validation data to KNN model to
@@ -197,6 +197,7 @@ class NormalizationScaler:
     def __init__(self):
         pass
 
+    # TODO: see if you can do this in a numpy-ish way
     def __call__(self, features):
         """
         Normalize features for every sample
@@ -257,6 +258,7 @@ class MinMaxScaler:
         self.x_max = None
         self.x_min = None
 
+    # TODO: set if denom = 0 set denom = 1
     def __call__(self, features):
         """
         normalize the feature vector for each sample . For example,
