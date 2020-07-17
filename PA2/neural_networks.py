@@ -96,8 +96,11 @@ class linear_layer:
         # backward_output = ? (N-by-input_D numpy array, the gradient of the mini-batch loss w.r.t. X)
         # only return backward_output, but need to compute self.gradient['W'] and self.gradient['b']
         #################################################################################################
-        raise NotImplementedError(
-            "Not Implemented function: backward, class: linear_layer")
+        # raise NotImplementedError(
+        # "Not Implemented function: backward, class: linear_layer")
+        # print(grad.shape)
+        # print(X.shape)
+        # self.gradient['W'] = npgrad
         return backward_output
 
 
@@ -131,8 +134,11 @@ class relu:
         ################################################################################
         # TODO: Implement the relu forward pass. Store the result in forward_output    #
         ################################################################################
-        raise NotImplementedError(
-            "Not Implemented function: forward, class: relu")
+        # raise NotImplementedError(
+        # "Not Implemented function: forward, class: relu")
+        print(X.shape)
+        forward_output = np.max(X, 0)
+        print(forward_output.shape)
         return forward_output
 
     def backward(self, X, grad):
