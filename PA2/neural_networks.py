@@ -43,8 +43,6 @@ class linear_layer:
         # TODO: Use np.random.normal() with mean as 0 and standard deviation as 0.1
         # W Shape (input_D, output_D), b shape (1, output_D)
         ###############################################################################################
-        # raise NotImplementedError(
-        # "Not Implemented function: __init__, class: linear_layer")
         self.params['W'] = np.random.normal(0, 0.1, (input_D, output_D))
         self.params['b'] = np.random.normal(0, 0.1, (1, output_D))
 
@@ -54,8 +52,6 @@ class linear_layer:
         # TODO: Initialize gradients with zeros
         # Note: Shape of gradient is same as the respective variables
         ###############################################################################################
-        # raise NotImplementedError(
-        # "Not Implemented function: __init__, class: linear_layer")
         self.gradient['W'] = np.random.normal(0, 0.1, (input_D, output_D))
         self.gradient['b'] = np.random.normal(0, 0.1, (1, output_D))
 
@@ -74,13 +70,7 @@ class linear_layer:
         ################################################################################
         # TODO: Implement the linear forward pass. Store the result in forward_output  #
         ################################################################################
-        # raise NotImplementedError(
-        # "Not Implemented function: forward, class: linear_layer")
-        print(self.params['W'].shape)
-        print(X.shape)
-
         forward_output = np.dot(X, self.params['W']) + self.params['b']
-        print(forward_output.shape)
         return forward_output
 
     def backward(self, X, grad):
