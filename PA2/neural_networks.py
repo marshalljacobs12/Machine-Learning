@@ -180,8 +180,9 @@ class tanh:
         # TODO: Implement the tanh forward pass. Store the result in forward_output
         # You can use np.tanh()
         ################################################################################
-        raise NotImplementedError(
-            "Not Implemented function: forward, class: tanh")
+        # raise NotImplementedError(
+        # "Not Implemented function: forward, class: tanh")
+        forward_output = np.tanh(X)
         return forward_output
 
     def backward(self, X, grad):
@@ -415,8 +416,8 @@ def main(main_params, optimization_type="minibatch_sgd"):
             # Do not modify them.
             ######################################################################################
 
-            raise NotImplementedError(
-                "Not Implemented BACKWARD PASS in main()")
+            # raise NotImplementedError(
+            # "Not Implemented BACKWARD PASS in main()")
 
             ######################################################################################
             # NOTE: DO NOT MODIFY CODE BELOW THIS, until next TODO
