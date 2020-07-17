@@ -74,8 +74,13 @@ class linear_layer:
         ################################################################################
         # TODO: Implement the linear forward pass. Store the result in forward_output  #
         ################################################################################
-        raise NotImplementedError(
-            "Not Implemented function: forward, class: linear_layer")
+        # raise NotImplementedError(
+        # "Not Implemented function: forward, class: linear_layer")
+        print(self.params['W'].shape)
+        print(X.shape)
+
+        forward_output = np.dot(X, self.params['W']) + self.params['b']
+        print(forward_output.shape)
         return forward_output
 
     def backward(self, X, grad):
@@ -297,8 +302,8 @@ def miniBatchGradientDescent(model, momentum, _lambda, _alpha, _learning_rate):
                     # And update model parameter
                     #################################################################################
 
-                    # raise NotImplementedError(
-                        # "Not Implemented function: miniBatchGradientDescent")
+                    raise NotImplementedError(
+                        "Not Implemented function: miniBatchGradientDescent")
 
                 else:
 
