@@ -325,7 +325,10 @@ def miniBatchGradientDescent(model, momentum, _lambda, _alpha, _learning_rate):
                     # TODO: update model parameter without momentum
                     #################################################################################
                     # think this is right
-                    module.params[key] -= _lambda * module.gradient[key]
+                    # print('_lambda: ', _lambda)
+                    # print('_learning_rate: ', _learning_rate)
+                    # print('module.gradient[key]: ', module.gradient[key])
+                    module.params[key] -= _learning_rate * module.gradient[key]
 
     return model
 
@@ -432,9 +435,9 @@ def main(main_params, optimization_type="minibatch_sgd"):
             # Do not modify them.
             ######################################################################################
 
-            grad_d1 = model['L2'].backward(h1, grad_a2)
-            grad_h1 = model['drop1'].backward(a1, grad_d1)
-            grad_a1 = model['nonlinear1'].backward(x, grad_h1)
+            grad_d1 = model['L2'].backward(d1, grad_a2)
+            grad_h1 = model['drop1'].backward(h1, grad_d1)
+            grad_a1 = model['nonlinear1'].backward(a1, grad_h1)
 
             ######################################################################################
             # NOTE: DO NOT MODIFY CODE BELOW THIS, until next TODO
