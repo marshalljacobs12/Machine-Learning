@@ -70,7 +70,9 @@ class linear_layer:
         ################################################################################
         # TODO: Implement the linear forward pass. Store the result in forward_output  #
         ################################################################################
-        forward_output = np.dot(X, self.params['W']) + self.params['b']
+        forward_output = np.matmul(X, self.params['W']) + self.params['b']
+        # print('forward: X.shape: ', X.shape)
+        # print('forward_output: forward_output.shape:', forward_output.shape)
         return forward_output
 
     def backward(self, X, grad):
@@ -101,6 +103,10 @@ class linear_layer:
         # print(grad.shape)
         # print(X.shape)
         # self.gradient['W'] = npgrad
+        # print('grad.shape: ', grad.shape)
+        self.gradient['W'] = np.matmul(X.T, grad)
+        self.gradient['b'] = np.dot(np.ones(1, len(grad)), grad)
+        backward_output = np.matmul(grad, self.params['W'].T)
         return backward_output
 
 
@@ -136,9 +142,9 @@ class relu:
         ################################################################################
         # raise NotImplementedError(
         # "Not Implemented function: forward, class: relu")
-        print(X.shape)
+        # print(X.shape)
         forward_output = np.max(X, 0)
-        print(forward_output.shape)
+        # print(forward_output.shape)
         return forward_output
 
     def backward(self, X, grad):
@@ -199,8 +205,10 @@ class tanh:
         # TODO: Implement the backward pass
         # Derivative of tanh is (1 - tanh^2)
         ####################################################################################################
-        raise NotImplementedError(
-            "Not Implemented function: backward, class: tanh")
+        # raise NotImplementedError(
+        # "Not Implemented function: backward, class: tanh")
+        backward_output = 1 - np.square(np.tanh(X))
+        # print(backward_output.shape)
         return backward_output
 
 
@@ -416,8 +424,8 @@ def main(main_params, optimization_type="minibatch_sgd"):
             # Do not modify them.
             ######################################################################################
 
-            # raise NotImplementedError(
-            # "Not Implemented BACKWARD PASS in main()")
+            raise NotImplementedError(
+                "Not Implemented BACKWARD PASS in main()")
 
             ######################################################################################
             # NOTE: DO NOT MODIFY CODE BELOW THIS, until next TODO
