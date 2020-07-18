@@ -142,9 +142,16 @@ class relu:
         ################################################################################
         # raise NotImplementedError(
         # "Not Implemented function: forward, class: relu")
-        # print(X.shape)
-        forward_output = np.max(X, 0)
-        # print(forward_output.shape)
+        print('relu X.shape: ', X.shape)
+        zeros = np.zeros_like(X)
+        # forward_output = np.max(X, 0)
+        forward_output = np.maximum(X, zeros)
+        print('relu forward_output.shape: ', forward_output.shape)
+        # TESTING
+        # test = np.array([[1, 0, 3], [0, 0, 2], [1, 4, 7]])
+        # test_mask = (test > 0).astype(int)
+        # print(test_mask)
+        self.mask = (X > 0).astype(int)
         return forward_output
 
     def backward(self, X, grad):
