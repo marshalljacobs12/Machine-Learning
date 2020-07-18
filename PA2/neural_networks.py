@@ -142,11 +142,11 @@ class relu:
         ################################################################################
         # raise NotImplementedError(
         # "Not Implemented function: forward, class: relu")
-        print('relu X.shape: ', X.shape)
+        # print('relu X.shape: ', X.shape)
         zeros = np.zeros_like(X)
         # forward_output = np.max(X, 0)
         forward_output = np.maximum(X, zeros)
-        print('relu forward_output.shape: ', forward_output.shape)
+        # print('relu forward_output.shape: ', forward_output.shape)
         # TESTING
         # test = np.array([[1, 0, 3], [0, 0, 2], [1, 4, 7]])
         # test_mask = (test > 0).astype(int)
@@ -171,8 +171,10 @@ class relu:
         # TODO: Implement the backward pass
         # You can use the mask created in the forward step.
         ####################################################################################################
-        raise NotImplementedError(
-            "Not Implemented function: backward, class: relu")
+        # raise NotImplementedError(
+        #     "Not Implemented function: backward, class: relu")
+        # Only send back the grads for the elements that contributed to the pred
+        backward_output = np.multiply(grad, self.mask)
         return backward_output
 
 
