@@ -316,7 +316,6 @@ def miniBatchGradientDescent(model, momentum, _lambda, _alpha, _learning_rate):
                     # m = alpha * m - learning_rate * g (Check add_momentum() function in utils file)
                     # And update model parameter
                     #################################################################################
-
                     raise NotImplementedError(
                         "Not Implemented function: miniBatchGradientDescent")
 
@@ -325,9 +324,8 @@ def miniBatchGradientDescent(model, momentum, _lambda, _alpha, _learning_rate):
                     #################################################################################
                     # TODO: update model parameter without momentum
                     #################################################################################
-
-                    raise NotImplementedError(
-                        "Not Implemented function: miniBatchGradientDescent")
+                    # think this is right
+                    module.params[key] -= _lambda * module.gradient[key]
 
     return model
 
