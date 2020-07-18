@@ -105,7 +105,7 @@ class linear_layer:
         # self.gradient['W'] = npgrad
         # print('grad.shape: ', grad.shape)
         self.gradient['W'] = np.matmul(X.T, grad)
-        self.gradient['b'] = np.dot(np.ones(1, len(grad)), grad)
+        self.gradient['b'] = np.dot(np.ones((1, len(grad))), grad)
         backward_output = np.matmul(grad, self.params['W'].T)
         return backward_output
 
@@ -302,13 +302,13 @@ def miniBatchGradientDescent(model, momentum, _lambda, _alpha, _learning_rate):
     '''
 
     for module_name, module in model.items():
-        print('module_name: ', module_name)
-        print('module: ', module)
+        # print('module_name: ', module_name)
+        # print('module: ', module)
         # check if a module has learnable parameters
         if hasattr(module, 'params'):
             for key, _ in module.params.items():
                 g = module.gradient[key] + _lambda * module.params[key]
-                print('g: ', g)
+                # print('g: ', g)
                 if _alpha > 0.0:
 
                     #################################################################################
@@ -432,8 +432,9 @@ def main(main_params, optimization_type="minibatch_sgd"):
             # Do not modify them.
             ######################################################################################
 
-            raise NotImplementedError(
-                "Not Implemented BACKWARD PASS in main()")
+            grad_d1 = model['L2'].backward(h1, grad_a2)
+            grad_h1 = model['drop1'].backward(a1, grad_d1)
+            grad_a1 = model['nonlinear1'].backward(x, grad_h1)
 
             ######################################################################################
             # NOTE: DO NOT MODIFY CODE BELOW THIS, until next TODO
