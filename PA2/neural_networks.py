@@ -278,8 +278,9 @@ class dropout:
         # You can use the mask created in the forward step
         ####################################################################################################
 
-        raise NotImplementedError(
-            "Not Implemented function: backward, class: dropout")
+        # raise NotImplementedError(
+        # "Not Implemented function: backward, class: dropout")
+        backward_output = np.multiply(self.mask, grad)
         return backward_output
 
 
