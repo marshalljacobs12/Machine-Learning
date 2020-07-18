@@ -500,7 +500,7 @@ def main(main_params, optimization_type="minibatch_sgd"):
             #     "Not Implemented COMPUTING VALIDATION ACCURACY in main()")
             a1 = model['L1'].forward(x)
             h1 = model['nonlinear1'].forward(a1)
-            d1 = model['drop1'].forward(h1, is_train=True)
+            d1 = model['drop1'].forward(h1, is_train=False)
             a2 = model['L2'].forward(d1)
 
             ######################################################################################
