@@ -329,7 +329,7 @@ def miniBatchGradientDescent(model, momentum, _lambda, _alpha, _learning_rate):
                     # print('_learning_rate: ', _learning_rate)
                     # print('module.gradient[key]: ', module.gradient[key])
                     module.params[key] -= _learning_rate * module.gradient[key]
-
+                    # module.params[key] -= _learning_rate * g
     return model
 
 
