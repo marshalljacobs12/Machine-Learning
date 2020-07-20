@@ -52,8 +52,8 @@ class linear_layer:
         # TODO: Initialize gradients with zeros
         # Note: Shape of gradient is same as the respective variables
         ###############################################################################################
-        self.gradient['W'] = np.random.normal(0, 0.1, (input_D, output_D))
-        self.gradient['b'] = np.random.normal(0, 0.1, (1, output_D))
+        self.gradient['W'] = np.zeros((input_D, output_D))
+        self.gradient['b'] = np.zeros((1, output_D))
 
     def forward(self, X):
         """
@@ -216,7 +216,9 @@ class tanh:
         ####################################################################################################
         # raise NotImplementedError(
         # "Not Implemented function: backward, class: tanh")
+        # print('tanh: X.shape: ', X.shape)
         backward_output = 1 - np.square(np.tanh(X))
+        # print('tanh: backward_output.shape: ', backward_output.shape)
         # print(backward_output.shape)
         return backward_output
 
@@ -330,8 +332,8 @@ def miniBatchGradientDescent(model, momentum, _lambda, _alpha, _learning_rate):
                     # print('_lambda: ', _lambda)
                     # print('_learning_rate: ', _learning_rate)
                     # print('module.gradient[key]: ', module.gradient[key])
-                    module.params[key] -= _learning_rate * module.gradient[key]
-                    # module.params[key] -= _learning_rate * g
+                    # module.params[key] -= _learning_rate * module.gradient[key]
+                    module.params[key] -= _learning_rate * g
     return model
 
 
