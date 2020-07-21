@@ -71,8 +71,9 @@ class linear_layer:
         # TODO: Implement the linear forward pass. Store the result in forward_output  #
         ################################################################################
         forward_output = np.matmul(X, self.params['W']) + self.params['b']
+        # print('forward: self.params[W]: ', self.params['W'].shape)
         # print('forward: X.shape: ', X.shape)
-        # print('forward_output: forward_output.shape:', forward_output.shape)
+        # print('forward: forward_output.shape:', forward_output.shape)
         return forward_output
 
     def backward(self, X, grad):
@@ -144,14 +145,22 @@ class relu:
         # "Not Implemented function: forward, class: relu")
         # print('relu X.shape: ', X.shape)
         zeros = np.zeros_like(X)
+        # print('relu forward: X.shape: ', X.shape)
+        # print('relu forward: zeros.shape: ', zeros.shape)
         # forward_output = np.max(X, 0)
+        # X_test = np.array([[3.1, 0.0, 5.0], [-2.2, 0.8, -5.5]])
+        # zeros_test = np.zeros_like(X_test)
+        # output_test = np.maximum(X_test, zeros_test)
+        # print(output_test)
         forward_output = np.maximum(X, zeros)
-        # print('relu forward_output.shape: ', forward_output.shape)
+        # print('relu forward: forward_output.shape: ', forward_output.shape)
         # TESTING
         # test = np.array([[1, 0, 3], [0, 0, 2], [1, 4, 7]])
         # test_mask = (test > 0).astype(int)
         # print(test_mask)
         self.mask = (X > 0).astype(int)
+        # self.mask = (X > 0).astype(float)
+        # print('relu: self.mask: ', self.mask)
         return forward_output
 
     def backward(self, X, grad):
@@ -175,6 +184,13 @@ class relu:
         #     "Not Implemented function: backward, class: relu")
         # Only send back the grads for the elements that contributed to the pred
         backward_output = np.multiply(grad, self.mask)
+        # print('relu backward: grad.shape: ', grad.shape)
+        # print('relu backward: self.mask.shape: ', self.mask.shape)
+        # print('relu backward: backward_output.shape: ', backward_output.shape)
+        # test_grad = np.array([[1.2, -1.2, 3.1], [0.0, 12.0, -5.4]])
+        # test_mask = np.array([[1, 0, 1], [0, 1, 0]])
+        # test_prod = np.multiply(test_grad, test_mask)
+        # print(test_prod)
         return backward_output
 
 
@@ -217,7 +233,12 @@ class tanh:
         # raise NotImplementedError(
         # "Not Implemented function: backward, class: tanh")
         # print('tanh: X.shape: ', X.shape)
-        backward_output = 1 - np.square(np.tanh(X))
+        # print('tanh: grad.shape: ', grad.shape)
+        # backward_output = 1 - np.square(np.tanh(X))
+        # ones = np.ones_like(grad)
+        # backward_output = ones - np.square(np.tanh(grad))
+        backward_output = np.multiply(grad, (1 - np.tanh(X)**2))
+        # print(backward_output)
         # print('tanh: backward_output.shape: ', backward_output.shape)
         # print(backward_output.shape)
         return backward_output
