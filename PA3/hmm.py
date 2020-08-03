@@ -35,6 +35,25 @@ class HMM:
         ###################################################
         # Edit here
         ###################################################
+        # Initial values
+        for s in range(S):
+            ## alpha[s, 0] = self.pi[s] * self.B[s, 0]
+            alpha[s, 0] = self.pi[s] * self.B[s, self.obs_dict[Osequence[0]]]
+        # print(self.obs_dict)
+        # print(Osequence)
+        for t in range(1, L):
+            for s in range(1, S):
+                ## sum_ = 0
+                # for s_prime in range(S):
+                # a_s',s * alpha_s'(t-1)
+                ## sum_ += self.A[s_prime, s] * alpha[s_prime, t-1]
+                ## sum_ *= self.B[s, t-1]
+                ## alpha[s, t] = sum_
+                alpha[s, t] = sum(self.A[s_prime, s] * alpha[s_prime, t-1]
+                                  for s_prime in range(S))
+                alpha[s, t] *= self.B[s, self.obs_dict[Osequence[t]]]
+                # alpha[s, t] = self.B[s, self.obs_dict[Osequence[t]]] * \
+                # np.dot(self.A[:, s], alpha[:, t-1])
         return alpha
 
     def backward(self, Osequence):
@@ -85,7 +104,8 @@ class HMM:
         # Edit here
         ###################################################
         return prob
-    #TODO:
+    # TODO:
+
     def likelihood_prob(self, Osequence):
         """
         Inputs:
