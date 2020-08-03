@@ -95,6 +95,9 @@ class HMM:
         ###################################################
         # Edit here
         ###################################################
+        alpha = self.forward(Osequence)
+        # sum up all alpha's in last column
+        prob = sum(alpha[:, -1])
         return prob
 
     def posterior_prob(self, Osequence):
