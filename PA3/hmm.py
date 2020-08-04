@@ -42,9 +42,10 @@ class HMM:
         # print(self.obs_dict)
         # print(Osequence)
         for t in range(1, L):
-            for s in range(1, S):
+            # for s in range(1, S):
+            for s in range(S):
                 # sum_ = 0
-                # for s_prime in range(S):
+                # #for s_prime in range(S):
                 # a_s',s * alpha_s'(t-1)
                 # sum_ += self.A[s_prime, s] * alpha[s_prime, t-1]
                 # sum_ *= self.B[s, t-1]
