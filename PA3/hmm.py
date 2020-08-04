@@ -102,6 +102,13 @@ class HMM:
         ###################################################
         # Edit here
         ###################################################
+        seq_prob = self.sequence_prob(Osequence)
+        alpha = self.forward(Osequence)
+        beta = self.backward(Osequence)
+
+        for i in range(S):
+            for t in range(L):
+                prob[i, t] = alpha[i, t] * beta[i, t] / seq_prob
         return prob
     # TODO:
 
