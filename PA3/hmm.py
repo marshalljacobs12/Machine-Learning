@@ -126,6 +126,15 @@ class HMM:
         ###################################################
         # Edit here
         ###################################################
+        alpha = self.forward(Osequence)
+        beta = self.backward(Osequence)
+        seq_prob = self.sequence_prob(Osequence)
+        for s in range(S):
+            for s_prime in range(S):
+                for t in range(L-1):
+                    prob[s, s_prime, t] = alpha[s, t] * self.A[s, s_prime] * \
+                        self.B[s_prime, self.obs_dict[Osequence[t+1]]] * \
+                        beta[s_prime, t+1] / seq_prob
         return prob
 
     def viterbi(self, Osequence):
