@@ -17,6 +17,9 @@ class HMM:
         self.B = B
         self.obs_dict = obs_dict
         self.state_dict = state_dict
+        self.state_dict2 = {}
+        for k, v in state_dict.items():
+            self.state_dict2[v] = k
 
     def forward(self, Osequence):
         """
@@ -139,14 +142,41 @@ class HMM:
 
     def viterbi(self, Osequence):
         """
+        Viterbi algorithm
         Inputs:
-        - Osequence: (1*L) A numpy array of observation sequence with length L
-
+        - pi: A numpy array of initial probailities. pi[i] = P(Z_1 = s_i)
+        - A: A numpy array of transition probailities. A[i, j] = P(Z_t = s_j|Z_t-1 = s_i)
+        - B: A numpy array of observation probabilities. B[i, k] = P(X_t = o_k| Z_t = s_i)
+        - O: A list of observation sequence (in terms of index, not the actual symbol)
         Returns:
-        - path: A List of the most likely hidden state path k* (return state instead of idx)
+        - path: A list of the most likely hidden state path k* (in terms of the state index)
+        argmax_k P(s_k1:s_kT | x_1:x_T)
         """
         path = []
-        ###################################################
-        # Q3.3 Edit here
-        ###################################################
+        S = len(self.pi)
+        L = len(Osequence)
+        delta = np.zeros([S, L])    # delta[s, t]'s
+        Delta = {}                  # Dictionary of optimal paths ending at each state
+        for s in range(S):
+            delta[s, 0] = self.pi[s] * self.B[s, self.obs_dict[Osequence[0]]]
+            Delta[s] = [s]
+
+        for t in range(1, L):
+            # Build up best path for each state iteratively from t=2 to T
+            best_path = {}
+            for s in range(S):
+                deltas = [self.B[s, self.obs_dict[Osequence[t]]] *
+                          self.A[s_prime, s] * delta[s_prime, t-1] for s_prime in range(S)]
+                delta[s, t] = max(deltas)
+                state = np.argmax(deltas)
+                best_path[s] = Delta[state] + [s]
+            Delta = best_path
+        # print('Delta: ', Delta)
+        # print('delta: ', delta)
+        state = np.argmax(delta[:, -1])
+        # print('state: ', state)
+        path_indices = Delta[state]
+        for i in path_indices:
+            path.append(self.state_dict2[i])
+        # print('path_indices: ', path_indices)
         return path
