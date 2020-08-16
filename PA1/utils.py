@@ -23,7 +23,6 @@ def f1_score(real_labels, predicted_labels):
 
 
 class Distances:
-    # TODO: if denom = 0, set denom = 1
     @staticmethod
     def canberra_distance(point1, point2):
         """
@@ -33,11 +32,6 @@ class Distances:
         """
         dist = np.sum(np.abs(point1 - point2) /
                       (np.abs(point1) + np.abs(point2)))
-        # numerator = np.sum(np.abs(point1 - point2))
-        # denominator = np.sum(np.abs(point1) + np.abs(point2))
-        # if denominator == 0:
-        # denominator = 1
-        # dist = numerator / denominator
         return dist
 
     @staticmethod
@@ -185,19 +179,12 @@ class HyperparameterTuner:
                         self.best_model = model
                         self.best_scaler = scaler_name
                         best_f1 = f1
-        # You need to assign the final values to these variables
-        # self.best_k = None
-        # self.best_distance_function = None
-        # self.best_scaler = None
-        # self.best_model = None
-        # raise NotImplementedError
 
 
 class NormalizationScaler:
     def __init__(self):
         pass
 
-    # TODO: see if you can do this in a numpy-ish way
     def __call__(self, features):
         """
         Normalize features for every sample
@@ -258,7 +245,6 @@ class MinMaxScaler:
         self.x_max = None
         self.x_min = None
 
-    # TODO: set if denom = 0 set denom = 1
     def __call__(self, features):
         """
         normalize the feature vector for each sample . For example,
