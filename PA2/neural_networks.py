@@ -343,7 +343,7 @@ def miniBatchGradientDescent(model, momentum, _lambda, _alpha, _learning_rate):
                         # "Not Implemented function: miniBatchGradientDescent")
                     momentum[module_name + '_' + key] = _alpha * \
                         momentum[module_name + '_' + key] - _learning_rate * g
-                    module.params[key] += momentum
+                    module.params[key] += momentum[module_name + '_' + key]
                 else:
 
                     #################################################################################
