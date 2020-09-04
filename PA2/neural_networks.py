@@ -454,19 +454,11 @@ def main(main_params, optimization_type="minibatch_sgd"):
 
             ### backward ###
             grad_a2 = model['loss'].backward(a2, y)
-            ######################################################################################
-            # TODO: Call the backward methods of every layer in the model in reverse order
-            # We have given the first and last backward calls
-            # Do not modify them.
-            ######################################################################################
 
             grad_d1 = model['L2'].backward(d1, grad_a2)
             grad_h1 = model['drop1'].backward(h1, grad_d1)
             grad_a1 = model['nonlinear1'].backward(a1, grad_h1)
 
-            ######################################################################################
-            # NOTE: DO NOT MODIFY CODE BELOW THIS, until next TODO
-            ######################################################################################
             grad_x = model['L1'].backward(x, grad_a1)
 
             ### gradient_update ###
@@ -480,22 +472,10 @@ def main(main_params, optimization_type="minibatch_sgd"):
                 np.arange(i * minibatch_size, (i + 1) * minibatch_size))
 
             ### forward ###
-            ######################################################################################
-            # TODO: Call the forward methods of every layer in the model in order
-            # Check above forward code
-            # Make sure to keep train as False
-            ######################################################################################
-
-            # raise NotImplementedError(
-            #     "Not Implemented COMPUTING TRAINING ACCURACY in main()")
             a1 = model['L1'].forward(x)
             h1 = model['nonlinear1'].forward(a1)
             d1 = model['drop1'].forward(h1, is_train=False)
             a2 = model['L2'].forward(d1)
-
-            ######################################################################################
-            # NOTE: DO NOT MODIFY CODE BELOW THIS, until next TODO
-            ######################################################################################
 
             loss = model['loss'].forward(a2, y)
             train_loss += loss
@@ -518,22 +498,10 @@ def main(main_params, optimization_type="minibatch_sgd"):
                 np.arange(i * minibatch_size, (i + 1) * minibatch_size))
 
             ### forward ###
-            ######################################################################################
-            # TODO: Call the forward methods of every layer in the model in order
-            # Check above forward code
-            # Make sure to keep train as False
-            ######################################################################################
-
-            # raise NotImplementedError(
-            #     "Not Implemented COMPUTING VALIDATION ACCURACY in main()")
             a1 = model['L1'].forward(x)
             h1 = model['nonlinear1'].forward(a1)
             d1 = model['drop1'].forward(h1, is_train=False)
             a2 = model['L2'].forward(d1)
-
-            ######################################################################################
-            # NOTE: DO NOT MODIFY CODE BELOW THIS, until next TODO
-            ######################################################################################
 
             loss = model['loss'].forward(a2, y)
             val_loss += loss
@@ -561,13 +529,6 @@ def main(main_params, optimization_type="minibatch_sgd"):
 
 
 if __name__ == "__main__":
-
-    ######################################################################################
-    # Do not change this part of the code.
-    # These are the default arguments used to run your code.
-    # These parameters will be changed while grading.
-    ######################################################################################
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--random_seed', default=42)
     parser.add_argument('--learning_rate', default=0.01)
