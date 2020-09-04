@@ -325,35 +325,15 @@ def miniBatchGradientDescent(model, momentum, _lambda, _alpha, _learning_rate):
     '''
 
     for module_name, module in model.items():
-        # print('module_name: ', module_name)
-        # print('module: ', module)
         # check if a module has learnable parameters
         if hasattr(module, 'params'):
             for key, _ in module.params.items():
                 g = module.gradient[key] + _lambda * module.params[key]
-                # print('g: ', g)
                 if _alpha > 0.0:
-
-                    #################################################################################
-                    # TODO: Update momentun using the formula:
-                    # m = alpha * m - learning_rate * g (Check add_momentum() function in utils file)
-                    # And update model parameter
-                    #################################################################################
-                    # raise NotImplementedError(
-                        # "Not Implemented function: miniBatchGradientDescent")
                     momentum[module_name + '_' + key] = _alpha * \
                         momentum[module_name + '_' + key] - _learning_rate * g
                     module.params[key] += momentum[module_name + '_' + key]
                 else:
-
-                    #################################################################################
-                    # TODO: update model parameter without momentum
-                    #################################################################################
-                    # think this is right
-                    # print('_lambda: ', _lambda)
-                    # print('_learning_rate: ', _learning_rate)
-                    # print('module.gradient[key]: ', module.gradient[key])
-                    # module.params[key] -= _learning_rate * module.gradient[key]
                     module.params[key] -= _learning_rate * g
     return model
 
