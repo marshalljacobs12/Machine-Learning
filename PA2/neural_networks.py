@@ -273,10 +273,6 @@ class dropout:
             - forward_output: A numpy array of the same shape of X (the output of dropout)
         """
 
-        ################################################################################
-        #  TODO: We provide the forward pass to you. You only need to understand it.   #
-        ################################################################################
-
         if is_train:
             self.mask = (np.random.uniform(0.0, 1.0, X.shape) >=
                          self.r).astype(float) * (1.0 / (1.0 - self.r))
@@ -296,13 +292,6 @@ class dropout:
             - backward_output: A numpy array of the same shape as X, where each element is the partial derivative of the mini-batch loss w.r.t. the corresponding element in X.
         """
 
-        ####################################################################################################
-        # TODO: Implement the backward pass
-        # You can use the mask created in the forward step
-        ####################################################################################################
-
-        # raise NotImplementedError(
-        # "Not Implemented function: backward, class: dropout")
         backward_output = np.multiply(self.mask, grad)
         return backward_output
 
