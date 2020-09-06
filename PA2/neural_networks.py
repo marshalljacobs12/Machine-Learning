@@ -207,12 +207,6 @@ class tanh:
             - forward_output: A numpy array of the same shape of X
         """
 
-        ################################################################################
-        # TODO: Implement the tanh forward pass. Store the result in forward_output
-        # You can use np.tanh()
-        ################################################################################
-        # raise NotImplementedError(
-        # "Not Implemented function: forward, class: tanh")
         forward_output = np.tanh(X)
         return forward_output
 
@@ -226,21 +220,7 @@ class tanh:
             - backward_output: A numpy array of the same shape as X, where each element is the partial derivative of the mini-batch loss w.r.t. the corresponding element in  X.
         """
 
-        ####################################################################################################
-        # TODO: Implement the backward pass
-        # Derivative of tanh is (1 - tanh^2)
-        ####################################################################################################
-        # raise NotImplementedError(
-        # "Not Implemented function: backward, class: tanh")
-        # print('tanh: X.shape: ', X.shape)
-        # print('tanh: grad.shape: ', grad.shape)
-        # backward_output = 1 - np.square(np.tanh(X))
-        # ones = np.ones_like(grad)
-        # backward_output = ones - np.square(np.tanh(grad))
         backward_output = np.multiply(grad, (1 - np.tanh(X)**2))
-        # print(backward_output)
-        # print('tanh: backward_output.shape: ', backward_output.shape)
-        # print(backward_output.shape)
         return backward_output
 
 
