@@ -36,22 +36,10 @@ class linear_layer:
     """
 
     def __init__(self, input_D, output_D):
-
         self.params = dict()
-
-        ###############################################################################################
-        # TODO: Use np.random.normal() with mean as 0 and standard deviation as 0.1
-        # W Shape (input_D, output_D), b shape (1, output_D)
-        ###############################################################################################
         self.params['W'] = np.random.normal(0, 0.1, (input_D, output_D))
         self.params['b'] = np.random.normal(0, 0.1, (1, output_D))
-
         self.gradient = dict()
-
-        ###############################################################################################
-        # TODO: Initialize gradients with zeros
-        # Note: Shape of gradient is same as the respective variables
-        ###############################################################################################
         self.gradient['W'] = np.zeros((input_D, output_D))
         self.gradient['b'] = np.zeros((1, output_D))
 
@@ -67,13 +55,7 @@ class linear_layer:
             - forward_output: A N-by-output_D numpy array, where each 'row' is an output example/instance.
         """
 
-        ################################################################################
-        # TODO: Implement the linear forward pass. Store the result in forward_output  #
-        ################################################################################
         forward_output = np.matmul(X, self.params['W']) + self.params['b']
-        # print('forward: self.params[W]: ', self.params['W'].shape)
-        # print('forward: X.shape: ', X.shape)
-        # print('forward: forward_output.shape:', forward_output.shape)
         return forward_output
 
     def backward(self, X, grad):
@@ -92,19 +74,6 @@ class linear_layer:
             - backward_output: A N-by-input_D numpy array, where each 'row' (say row i) is the partial derivatives of the mini-batch loss w.r.t. X[i].
         """
 
-        #################################################################################################
-        # TODO: Implement the backward pass (i.e., compute the following three terms)
-        # self.gradient['W'] = ? (input_D-by-output_D numpy array, the gradient of the mini-batch loss w.r.t. self.params['W'])
-        # self.gradient['b'] = ? (1-by-output_D numpy array, the gradient of the mini-batch loss w.r.t. self.params['b'])
-        # backward_output = ? (N-by-input_D numpy array, the gradient of the mini-batch loss w.r.t. X)
-        # only return backward_output, but need to compute self.gradient['W'] and self.gradient['b']
-        #################################################################################################
-        # raise NotImplementedError(
-        # "Not Implemented function: backward, class: linear_layer")
-        # print(grad.shape)
-        # print(X.shape)
-        # self.gradient['W'] = npgrad
-        # print('grad.shape: ', grad.shape)
         self.gradient['W'] = np.matmul(X.T, grad)
         self.gradient['b'] = np.dot(np.ones((1, len(grad))), grad)
         backward_output = np.matmul(grad, self.params['W'].T)
