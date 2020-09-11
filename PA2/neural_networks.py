@@ -11,12 +11,6 @@ import json
 
 # 1. One linear Neural Network layer with forward and backward steps
 
-### Modules ###
-
-########################################################################################
-#   The following three modules (class) are what you need to complete  (check TODO)    #
-########################################################################################
-
 class linear_layer:
 
     """
