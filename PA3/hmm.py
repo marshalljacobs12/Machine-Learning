@@ -171,12 +171,9 @@ class HMM:
                 state = np.argmax(deltas)
                 best_path[s] = Delta[state] + [s]
             Delta = best_path
-        # print('Delta: ', Delta)
-        # print('delta: ', delta)
+
         state = np.argmax(delta[:, -1])
-        # print('state: ', state)
         path_indices = Delta[state]
         for i in path_indices:
             path.append(self.state_dict2[i])
-        # print('path_indices: ', path_indices)
         return path
