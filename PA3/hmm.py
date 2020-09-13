@@ -102,9 +102,6 @@ class HMM:
         S = len(self.pi)
         L = len(Osequence)
         prob = np.zeros([S, L])
-        ###################################################
-        # Edit here
-        ###################################################
         seq_prob = self.sequence_prob(Osequence)
         alpha = self.forward(Osequence)
         beta = self.backward(Osequence)
