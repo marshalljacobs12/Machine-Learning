@@ -113,7 +113,6 @@ class HMM:
             for t in range(L):
                 prob[i, t] = alpha[i, t] * beta[i, t] / seq_prob
         return prob
-    # TODO:
 
     def likelihood_prob(self, Osequence):
         """
@@ -126,9 +125,6 @@ class HMM:
         S = len(self.pi)
         L = len(Osequence)
         prob = np.zeros([S, S, L - 1])
-        ###################################################
-        # Edit here
-        ###################################################
         alpha = self.forward(Osequence)
         beta = self.backward(Osequence)
         seq_prob = self.sequence_prob(Osequence)
