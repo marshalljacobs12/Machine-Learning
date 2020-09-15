@@ -83,9 +83,6 @@ class HMM:
         - prob: A float number of P(x_1:x_T | λ)
         """
         prob = 0
-        ###################################################
-        # Edit here
-        ###################################################
         alpha = self.forward(Osequence)
         # sum up all alpha's in last column
         prob = sum(alpha[:, -1])
