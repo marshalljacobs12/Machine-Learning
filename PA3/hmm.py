@@ -62,9 +62,6 @@ class HMM:
         S = len(self.pi)
         L = len(Osequence)
         beta = np.zeros([S, L])
-        ###################################################
-        # Edit here
-        ###################################################
         for s in range(S):
             beta[s, L-1] = 1
 
