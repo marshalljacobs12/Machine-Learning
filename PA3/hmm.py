@@ -35,10 +35,6 @@ class HMM:
         S = len(self.pi)
         L = len(Osequence)
         alpha = np.zeros([S, L])
-        ###################################################
-        # Edit here
-        ###################################################
-        # Initial values
         for s in range(S):
             alpha[s, 0] = self.pi[s] * self.B[s, self.obs_dict[Osequence[0]]]
         for t in range(1, L):
