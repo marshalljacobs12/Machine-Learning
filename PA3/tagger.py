@@ -4,8 +4,6 @@ from util import accuracy
 from hmm import HMM
 from data_process import Dataset
 
-# TODO:
-
 
 def model_training(train_data, tags):
     """
@@ -62,8 +60,6 @@ def model_training(train_data, tags):
 
     model = HMM(pi, A, B, obs_dict, state_dict)
     return model
-
-# TODO:
 
 
 def sentence_tagging(test_data, model, tags):
