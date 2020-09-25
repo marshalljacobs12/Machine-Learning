@@ -72,10 +72,8 @@ def sentence_tagging(test_data, model, tags):
     - tagging: (num_sentence*num_tagging) a 2D list of output tagging for each sentences on test_data
     """
     tagging = []
-    ###################################################
-    # Edit here
-    ###################################################
     S = len(model.state_dict.keys())
+    
     for line in test_data:
         for word in line.words:
             if word not in model.obs_dict:
