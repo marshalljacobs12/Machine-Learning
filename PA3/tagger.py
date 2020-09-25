@@ -17,9 +17,6 @@ def model_training(train_data, tags):
     - model: an object of HMM class initialized with parameters(pi, A, B, obs_dict, state_dict) you calculated based on train_data
     """
     model = None
-    ###################################################
-    # Edit here
-    ###################################################
     obs_dict = {}
     state_dict = {}
     curr_index = 0
@@ -73,7 +70,7 @@ def sentence_tagging(test_data, model, tags):
     """
     tagging = []
     S = len(model.state_dict.keys())
-    
+
     for line in test_data:
         for word in line.words:
             if word not in model.obs_dict:
