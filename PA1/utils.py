@@ -1,9 +1,5 @@
 import numpy as np
-from knn import KNN
-
-############################################################################
-# DO NOT MODIFY ABOVE CODES
-############################################################################
+from knn import KNNs
 
 
 def f1_score(real_labels, predicted_labels):
